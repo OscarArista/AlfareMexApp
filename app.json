@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "AlfareMex",
+    "slug": "AlfareMex",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/faviconAA.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/iconoAA.png",
+        "backgroundColor": "#FFFFFF"
+        
+      }
+
+    },
+    "web": {
+      "favicon": "./assets/faviconAA.png"
+    }
+  }
+}
