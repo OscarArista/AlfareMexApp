@@ -9,13 +9,3 @@ const App = () =>{
 };
 
 export default App;
-
-
-// OPCION 2: CREAR COMPONENTE FUNCION
-// function App(){
-//   return (
-//     <NavigationContenedor/> // Llamar al Navegador de raiz
-//   )
-// };
-
-// export default App;
