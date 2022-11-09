@@ -55,7 +55,7 @@ const [ModaVisible,SetModalVisible] = React.useState(false);// Funcion quecibe d
                             }
                         }
                     >
-                        <Text style={styles.textStyle}>Aquirir</Text>
+                        <Text style={styles.textStyle}>Adquirir</Text>
                     </Pressable>
                 {/*----------Fin Modal------------*/}
                 </View>
@@ -101,7 +101,7 @@ const [ModaVisible,SetModalVisible] = React.useState(false);// Funcion quecibe d
                                 }
                             }
                         >
-                            <Text style={styles.textStyle}>Aquirir</Text>
+                            <Text style={styles.textStyle}>Adquirir</Text>
                         </Pressable>
                     {/*----------Fin Modal------------*/}
                     </View>

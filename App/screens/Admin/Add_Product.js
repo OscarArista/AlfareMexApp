@@ -9,7 +9,7 @@ const Add_Product = ({navigation})=>{
         <ScrollView style={styles.Container}>
             
             <View>
-                <Text style={styles.Title}>Registrar Product</Text>
+                <Text style={styles.Title}>Registrar Producto</Text>
             </View>
 
             <View>
@@ -67,7 +67,7 @@ const Add_Product = ({navigation})=>{
                             }
                         }
                     >
-                        <Text style={styles.textStyle}>Aquirir</Text>
+                        <Text style={styles.textStyle}>Adquirir</Text>
                     </Pressable>
                 {/*----------Fin Modal------------*/}
 

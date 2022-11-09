@@ -1,82 +1,120 @@
-import React from "react";
-import { StyleSheet,Text,View, TextInput,StatusBar,Image,Button} from 'react-native';
+import React, { Component } from "react";
+
+import { StyleSheet, Text, View, TextInput,TouchableOpacity, StatusBar, Image, Button, ImageBackground, Alert, } from 'react-native';
+
 // IMportar material para  iconos
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Style_Btn from "../../Componentes/Style_Btn";
+import Style_link from "../../Componentes/Style_link";
+
+
 
 //Funcion Log in
 const Login = ({navigation})=>{
 
+  const [user,setUser] = React.useState('');
+  const [pws,setPws] = React.useState('');
+
+    // const Data = {
+    //   name:"user",
+    //   password:"123qwerty"
+    // }
+    
+//body: JSON.stringify(Data)
+//Alert.alert('Usuario Invalido');
+
+  const acceso = () => {
+
+      var URL = 'https://ahh.proyectostics.com/AppMovil/login.php';
+      fetch(URL,{
+        method:'POST',
+        body: JSON.stringify({
+          name : user,
+          password : pws,
+        }),
+        headers:{
+          'Accept':'application/json',
+          'Content-Type': 'application/json'
+        },ñ
+      })
+      .then((respuesta) => respuesta.json()) //Crear objecto "respuesta " y especificar que es de tipo json, O mejor dicho se obtiene la respuesta y se parsea a JSON.
+      .then((respuestaJSON) => {
+
+        //Alert.alert(JSON.stringify(respuestaJSON));
+
+        if(respuestaJSON == "p"){
+          Alert.alert('Usuario Invalido');
+        }else if(respuestaJSON == "N"){
+          Alert.alert('Password Invalido'); 
+        }else{
+          navigation.navigate('Navigation')
+        }        
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    }
+
   const [ShowPassword, setShowPassword] = React.useState(false);
   
-        return(
+      return(        
         <View style={styles.Container}>
-            <Text style={styles.tittle}>Inicio de sesión</Text>
-            <Image
-              style={{width: 150,
-                height:150,
-                margin: 30 
-              }}
-              source={require('../../Recursos/Icon/iconoAA.png')}
-            />
-            <TextInput style={styles.textInput} placeholderTextColor='#fff' placeholder='Usuario'/>
+          <ImageBackground source={require('../../Recursos/Img/ceramics.jpg')} resizeMode='cover' style={styles.img}>
+          <View style={styles.Overshadow} >
+            <Text style={styles.tittle}>Hola!</Text>
+              <Image style={{width: 150, height:150, margin: 30, }} source={require('../../Recursos/Icon/user.png')}/>
+              <TextInput style={styles.textInput} 
+                placeholderTextColor='#fff'
+                placeholder='Usuario'
+                onChangeText={user =>  setUser(user)}
+                value={user}/>
+              
+              <View style={styles.InputPws}>
+                <TextInput style={{flex:1}} 
+                color='white' 
+                secureTextEntry={!ShowPassword} 
+                placeholderTextColor='#fff' 
+                placeholder='Password'
+                onChangeText={pws => setPws(pws)}
+                value={pws}/>
 
-            <View style={styles.InputPws}>
-
-            <TextInput style={{flex:1}} color='white' secureTextEntry={!ShowPassword} placeholderTextColor='#fff' placeholder='Password'/>
-            
-            <MaterialCommunityIcons style={{paddingHorizontal:10}} name={ShowPassword ? "eye-off":"eye"} color='gray' size={20}
-            onPress={()=>{
-              setShowPassword(!ShowPassword)
-            }} 
-            />
-            </View>
-            <Text style={styles.boton}>
-            <Button 
-              color="orange"
-              title="Iniciar sesión"
-              onPress={()=>{
-                navigation.navigate('Navigation')
-              }}
-            />
-            </Text>
-
-            <Text style={{color:'gray', marginTop:20, textAlign:'center'}} 
-            >Olvide mi contraseña</Text>
-
-            <Text style={styles.text} 
-            onPress={()=>{
-              navigation.navigate('Registro')
-            }}>¿Aun no te haz registrado?</Text>
-
-            <Button 
-              title="Vista previa admin"
-              color='orange'
-              onPress={()=>{
-                navigation.navigate('Home_Admin')
-              }}
+              <MaterialCommunityIcons style={{paddingHorizontal:10}} name={ShowPassword ? "eye-off":"eye"} color='#F39C12' size={20} onPress={()=>{ setShowPassword(!ShowPassword) }} />
+              </View>
+              
+              <Style_Btn 
+                onPress={()=> acceso()}
+                text={"Iniciar Sesion"}
               />
-            <StatusBar style="auto" />
+              
+              <Style_link 
+                onPress={()=> navigation.navigate('Registro')}
+                text={"¿Olvidaste tu contraseña?"}
+              />
+
+              <Style_link 
+                onPress={()=> navigation.navigate('Registro')}
+                text={"Crear una cuenta"}
+              />
+              <StatusBar style="auto" />
+          </View>
+          </ImageBackground>
         </View>
-);   
+    );    
+  
 }
 
 const styles = StyleSheet.create({
     Container:{
-    flex: 1,
-    //backgroundColor: '#000',
-    backgroundColor:'#404040',
-    alignItems: 'center',
-    justifyContent: 'center',
+      flex: 1,
     },
     tittle: {
-    fontSize: 40,
-    color: '#fff',
-    fontWeight: 'bold',
-    
+      fontSize: 40,
+      color: '#fff',
+      fontWeight: 'bold',
     },
     textInput: {
       borderWidth: 1,
-      borderColor: 'gray',
+      borderColor: '#F39C12',
       fontSize: 14,
       padding: 10,
       width: '80%',
@@ -85,33 +123,20 @@ const styles = StyleSheet.create({
       borderRadius:30,
       color:'white',
     },
-    text:{
-      color: '#fff',
-      padding: 10,
-      paddingStart: 20,
-      width: '80%',
-      height: 50,
-      marginTop: 22,
-      marginBottom:12,
-      textAlign:'center',
-      
+    Overshadow:{
+      flex:1,
+      backgroundColor:'#000000c0',
+      alignItems:'center',
+      justifyContent:'center',
+      alignContent:'center'
     },
-    boton:{
-      padding: 10,
-      paddingStart: 20,
-      width: '30%',
-      height: 50,
-      marginTop: 20,
-      textAlign:'center'
+    img:{
+      flex:1,
+      justifyContent:'center'
     },
-    // img:{
-    //   width:20, 
-    //   height:20, 
-    //   //left:170
-    // },
     InputPws:{
       borderWidth:1,
-      borderColor: 'gray',
+      borderColor: '#F39C12',
       fontSize:14,
       padding:10,
       borderRadius:30,
@@ -119,9 +144,18 @@ const styles = StyleSheet.create({
       marginTop:20,
       height:50,
       flexDirection:'row',
-      alignItems:'center',
-      
+      alignItems:'center',  
     },
 });
 
 export default Login;
+
+
+
+/* <Button 
+              title="Vista previa admin"
+              color='#F39C12'
+              onPress={()=>{
+                navigation.navigate('Home_Admin')
+              }}
+              /> */

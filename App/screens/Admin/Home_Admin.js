@@ -7,7 +7,7 @@ const Home_Admin = ({navigation}) =>{
         return (
             <ScrollView style={styles.Container}>
                 <View>  
-                    <Text style={styles.Title}>BienvenidO</Text>
+                    <Text style={styles.Title}>Bienvenido</Text>
 
                 </View>
 
@@ -32,99 +32,7 @@ const Home_Admin = ({navigation}) =>{
                     </View>
                 </View>
 
-                <View>
-                    <Text style={styles.SubTitle}>Validar Proveedor</Text>
-
-                    <View style={{backgroundColor:'gray', borderRadius:15, marginBottom:20}}>
-                        <Text style={styles.Text}>Nombre: xxxxxxx</Text>
-                        <Text style={styles.Text}>Domicilio: xxxxx</Text>
-                        <Text style={styles.Text}>Gmail: xxxxxx </Text>
-                        <Text style={styles.Text}>Telefono: ######</Text>
-                        <View style={{flexDirection:'row', padding:20}}>
-                            <View style={styles.btn}>
-                                <Button     
-                                    title="Aprobar"
-                                    color='orange'
-                                    onPress={()=>{
-
-                                    }}
-                                >
-                                </Button>
-
-                            </View>
-                            <View style={styles.btn}>
-                                <Button     
-                                    title="Eliminar"
-                                    color='orange'
-                                    onPress={()=>{
-
-                                    }}
-                                >
-                                </Button>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{backgroundColor:'gray', borderRadius:15, marginBottom:20}}>
-                        <Text style={styles.Text}>Nombre: xxxxxxx</Text>
-                        <Text style={styles.Text}>Domicilio: xxxxx</Text>
-                        <Text style={styles.Text}>Gmail: xxxxxx </Text>
-                        <Text style={styles.Text}>Telefono: ######</Text>
-                        <View style={{flexDirection:'row', padding:20}}>
-                            <View style={styles.btn}>
-                                <Button     
-                                    title="Aprobar"
-                                    color='orange'
-                                    onPress={()=>{
-
-                                    }}
-                                >
-                                </Button>
-
-                            </View>
-                            <View style={styles.btn}>
-                                <Button     
-                                    title="Eliminar"
-                                    color='orange'
-                                    onPress={()=>{
-
-                                    }}
-                                >
-                                </Button>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{backgroundColor:'gray', borderRadius:15, marginBottom:20}}>
-                        <Text style={styles.Text}>Nombre: xxxxxxx</Text>
-                        <Text style={styles.Text}>Domicilio: xxxxx</Text>
-                        <Text style={styles.Text}>Gmail: xxxxxx </Text>
-                        <Text style={styles.Text}>Telefono: ######</Text>
-                        <View style={{flexDirection:'row', padding:20}}>
-                            <View style={styles.btn}>
-                                <Button     
-                                    title="Aprobar"
-                                    color='orange'
-                                    onPress={()=>{
-
-                                    }}
-                                >
-                                </Button>
-
-                            </View>
-                            <View style={styles.btn}>
-                                <Button     
-                                    title="Eliminar"
-                                    color='orange'
-                                    onPress={()=>{
-
-                                    }}
-                                >
-                                </Button>
-                            </View>
-                        </View>
-                    </View>
-                </View>
+                
             </ScrollView>
         );
 }
@@ -133,45 +41,12 @@ const styles = StyleSheet.create({
     Container:{
         flex: 1,
         padding:20,
-        backgroundColor:'black'
+        backgroundColor:'#404040'
     },
     Title:{
         fontSize:55,
         fontWeight:'bold',
         color:'white',
-    },
-    Search:{
-        flex:1,
-        borderWidth:1,
-        borderColor:'gray',
-        margin:9,
-        padding:8,
-        height:40,
-        borderRadius:12,
-        color:'white',
-        
-    },
-    SubTitle:{
-        color:'white',
-        fontSize:30,
-        fontWeight:'bold',
-        marginTop:9,
-        marginBottom:9
-    },
-    img:{
-        marginTop:10,
-        marginBottom:10,
-        width:320,
-        height:200,
-        resizeMode:'stretch',
-        borderRadius:10
-    },
-    Text:{
-        color:'white',
-        fontSize:18,
-        paddingLeft:20,
-        padding:10,
-        width:250
     },
     btn:{
         flex:1,

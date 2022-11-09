@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Image, Animated, Button, Text, StyleSheet, View, Container } from "react-native";
+import { Image, Animated, StyleSheet, View, ActivityIndicator } from "react-native";
 
 //IMPORTAR Componente AL USAR navegacion Stack (Pilas)
 import { NavigationContainer } from '@react-navigation/native'
@@ -70,9 +70,12 @@ function MySplash({navigation}){
   return ( 
     <View style={styles.Fondo}>
       {/* Agregar la etiqueta para darle animacion */}
+      
       <FadeInview> 
         <Image style={styles.imagen} source={require('../Recursos/Icon/iconoAA.png')}></Image>
+        <ActivityIndicator size={50} color='white' />
       </FadeInview>
+
     </View>
   );
 }

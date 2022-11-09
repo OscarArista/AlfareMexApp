@@ -13,7 +13,6 @@ import Home from "./Home";
 import Profile from './Profile';
 import Productos from './Product';
 
-
 const Tab = createMaterialBottomTabNavigator(); //CREAR Para usar Tabs Infe..
 
 // Crear componente funcion
