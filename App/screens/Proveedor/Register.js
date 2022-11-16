@@ -5,16 +5,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 
 const Registroa = ({navigation}) =>{
-    ////const [ShowPassword, setShowPassword] = React.useState(false);
+
+    const [ShowPassword, setShowPassword] = React.useState(false);
 
     return (
     <View style={styles.Container}>
-{/* 
+
         <Text style={styles.Title}>
                 Registro de proveedor
         </Text>
-        <Image style={styles.imagen} source={require('../../Recursos/Icon/add_user.png')}></Image>
-
+        
         <TextInput style={styles.Txt_Input} placeholderTextColor='#fff' placeholder="Username"/>
 
         <TextInput style={styles.Txt_Input} placeholderTextColor='#fff' placeholder="Gmail"/>
@@ -48,7 +48,7 @@ const Registroa = ({navigation}) =>{
         <Text style={styles.text} 
             onPress={()=>{
             navigation.navigate('LoginScreen')
-        }}>Ya tengo una cuenta</Text>     */}
+        }}>Ya tengo una cuenta</Text>    
     </View>     
     );
 }
@@ -56,7 +56,7 @@ const Registroa = ({navigation}) =>{
 const styles = StyleSheet.create({
     Container:{
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#404040',
         alignItems: 'center',
         justifyContent: 'center',
     },

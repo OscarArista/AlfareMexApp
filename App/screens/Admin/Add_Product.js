@@ -1,9 +1,80 @@
-import React from "react";
-import { View, StyleSheet, Modal, Alert, Pressable, Text, Image, Button, ScrollView, TextInput} from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, Modal, Alert, Pressable, Text, Image, Button, ScrollView, TextInput, Platform} from "react-native";
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
+import Style_Btn from "../../Componentes/Style_Btn";
+import * as ImagePicker from 'expo-image-picker';
 
 const Add_Product = ({navigation})=>{
-    const [ModaVisible,SetModalVisible] = React.useState(false);// Funcion quecibe dos valores (Hooks)
+
+
+    const [Name_P, setName_P] = React.useState('');
+    const [Descripcion, setDescripcion] = React.useState('');
+    const [Precio, setPrecio] = React.useState('');
+    const [Categoria, setCategoria] = React.useState('');
+    const [image, setImage] = React.useState('');
+    const [photoStatus, setphotoStatus] = React.useState('No se ha seleccionado ninguna imagen');
+
+    const Add_P =()=>{
+
+        useEffect(()=>{
+            (async () =>{
+                if(Platform.OS !== 'android'){
+                    const {stutus} = await ImagePicker.requestCameraPermissionsAsync();
+                    if (stutus !== 'granted'){
+                        alert('Lo sentimos, se require permisos de la galeria ');
+                    }
+                }
+            })();
+        },[])
+
+        //seleccionar una imagen de la galeria
+        var URL = 'https://ahh.proyectostics.com/AppMovil/Registrar.php'
+
+        fetch(URL,{
+            method:'POST',
+            body: JSON.stringify({
+                
+            }),
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'aplication/json'
+            },
+        })
+        .then((respuesta) => respuesta.JSON())
+        .then((respuestaJSON) => {
+            Alert.alert('Funciona')
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
+        const pickImage = async()=>{
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                allowsEditing: false,
+                aspect:[4,3],
+                quality:1,
+            });
+            if(!result.cancelled){
+                setImage(result,uri);
+                setphotoStatus('Listo!, Imagen cargada correctamente')
+            }
+            props.parentCallback(result)
+        };
+
+        return(
+            <View style={{ alignItems: 'center' }}>
+                <Button
+                    title="Seleccionar Imagen"
+                    onPress={pickImage}
+                />
+                <Text style={{ fontSize:12, marginBottom:20, color:"#888888"}}>{photoStatus}</Text>
+                {image && <Image source={{uri: image}} style={{width:300, height:300}}></Image>}
+            </View>
+        );        
+    }
+
+    //const [ModaVisible,SetModalVisible] = React.useState(false);// Funcion quecibe dos valores (Hooks)
 
     return(
         <ScrollView style={styles.Container}>
@@ -22,55 +93,36 @@ const Add_Product = ({navigation})=>{
                 </Text>
             </View>
 
-            <View>
-                <TextInput style={styles.Txt_Input} placeholder='Nombre del Producto' placeholderTextColor='#fff'/>
-                <TextInput style={styles.Txt_Input} placeholder='Descripcion del Producto' placeholderTextColor='#fff'/>
-                <TextInput style={styles.Txt_Input} placeholder='Precio' placeholderTextColor='#fff'/>
-                <TextInput style={styles.Txt_Input} placeholder='Categoria' placeholderTextColor='#fff'/>
-            </View>
-
-            <Text style={styles.Text}>Agruegue una imagen</Text>
-            <View style={{alignItems:'center'}}>
-                <MaterialCommunity name="image-outline" color='gray' size={150}></MaterialCommunity> 
-            </View>
+            <View style={styles.Container2}>
+                <TextInput 
+                    style={styles.Txt_Input} 
+                    placeholder='Nombre del Producto' 
+                    placeholderTextColor='#fff'
+                    onChangeText={Name_P => setName_P(Name_P)}
+                    value={Name_P}/>
+                <TextInput 
+                    style={styles.Txt_Input} 
+                    placeholder='Descripcion del Producto' 
+                    placeholderTextColor='#fff'
+                    onChangeText={Descripcion => setDescripcion(Descripcion)}
+                    value={Descripcion}/>
+                <TextInput 
+                    style={styles.Txt_Input}
+                    placeholder='Precio' 
+                    placeholderTextColor='#fff'
+                    onChangeText={Precio => setPrecio(Precio)}
+                    value={Precio}/>
+                <TextInput 
+                    style={styles.Txt_Input} 
+                    placeholder='Categoria' 
+                    placeholderTextColor='#fff'
+                    onChangeText={Categoria => setCategoria(Categoria)}
+                    value={Categoria}/>
+                <Style_Btn onPress={()=> Add_P()} text={"Agregar"} />   
+                </View>
+                <Text style={styles.Text}>Agruegue una imagen</Text>
+                
             
-            {/*----------Inicio Modal------------*/}
-            <Modal style={{}}
-                        animationType="slide"
-                        transparent={true}
-                        visible={ModaVisible}
-                        onRequestClose={()=>{
-                            Alert.alert("Modal has been closed")
-                            SetModalVisible(!ModaVisible);
-                        }}
-                    >
-                        <View style={styles.centeredView}>
-                            <View  style={styles.modalView}>
-                                <Text style={styles.modalText}>Aun se esta trabajando 😉</Text>
-                                <Pressable
-                                style={[styles.button, styles.buttonClose]}
-                                    onPress={()=>{
-                                        SetModalVisible(!ModaVisible)
-                                        }
-                                    }
-                                >
-                                    <Text style={styles.textStyle}>Regresar</Text>
-                                </Pressable>
-                            </View>
-                        </View>
-                    </Modal>
-
-                    <Pressable
-                    style={[styles.button, styles.buttonOpen]}
-                        onPress={()=>{
-                            SetModalVisible(true)
-                            }
-                        }
-                    >
-                        <Text style={styles.textStyle}>Adquirir</Text>
-                    </Pressable>
-                {/*----------Fin Modal------------*/}
-
         </ScrollView>
 
     );
@@ -80,6 +132,7 @@ const styles = StyleSheet.create({
     Container:{
         flex:1,
         backgroundColor:'#404040',
+        //backgroundColor:'#757575',
         padding:20
         
     },
@@ -112,7 +165,12 @@ const styles = StyleSheet.create({
         backgroundColor:'gray', 
         borderRadius:30
     },
-
+    Container2:{
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center',
+        alignContent:'center'
+    },
     //.------Modal-------
     centeredView: {
         flex: 1,
@@ -163,3 +221,44 @@ const styles = StyleSheet.create({
 
 
 export default Add_Product;
+
+/* <View style={{alignItems:'center'}}>
+                <MaterialCommunity name="image-outline" color='gray' size={150}></MaterialCommunity> 
+            </View> */
+
+// {/*----------Inicio Modal------------*/}
+// <Modal style={{}}
+// animationType="slide"
+// transparent={true}
+// visible={ModaVisible}
+// onRequestClose={()=>{
+//     Alert.alert("Modal has been closed")
+//     SetModalVisible(!ModaVisible);
+// }}
+// >
+// <View style={styles.centeredView}>
+//     <View  style={styles.modalView}>
+//         <Text style={styles.modalText}>Aun se esta trabajando 😉</Text>
+//         <Pressable
+//         style={[styles.button, styles.buttonClose]}
+//             onPress={()=>{
+//                 SetModalVisible(!ModaVisible)
+//                 }
+//             }
+//         >
+//             <Text style={styles.textStyle}>Regresar</Text>
+//         </Pressable>
+//     </View>
+// </View>
+// </Modal>
+
+// <Pressable
+// style={[styles.button, styles.buttonOpen]}
+// onPress={()=>{
+//     SetModalVisible(true)
+//     }
+// }
+// >
+// <Text style={styles.textStyle}>Adquirir</Text>
+// </Pressable>
+// {/*----------Fin Modal------------*/}

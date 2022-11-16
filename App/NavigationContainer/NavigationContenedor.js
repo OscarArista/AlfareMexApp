@@ -16,6 +16,8 @@ import Registro from '../screens/Auth/Registro';
 import Register from '../screens/Proveedor/Register';
 import Home_Admin from '../screens/Admin/Home_Admin';
 import Add_Product from '../screens/Admin/Add_Product';
+import Remove_Product from '../screens/Admin/Remove_Product';
+import Remove_Provider from '../screens/Proveedor/Remove_Provider'
 
 //CREAR Variable Para usar Stacks
 const Stack = createNativeStackNavigator(); 
@@ -144,11 +146,11 @@ function MyTab(){
           component={ Registro }
           //options={{ title: 'Perfil' }}
         />
-        {/* <Stack.Screen 
+        <Stack.Screen 
           name="Register" 
           component={ Register }
           //options={{ title: 'Perfil' }}
-        /> */}
+        />
         <Stack.Screen 
           name="Home_Admin" 
           component={ Home_Admin }
@@ -158,6 +160,14 @@ function MyTab(){
           name="Add_Product" 
           component={ Add_Product }
           //options={{ title: 'Perfil' }}
+        />
+        <Stack.Screen
+          name='Remove_Product'
+          component={ Remove_Product}
+        />
+        <Stack.Screen
+          name='Remove_Provider'
+          component={ Remove_Provider}
         />
 
       </Stack.Navigator>

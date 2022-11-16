@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TextInput,TouchableOpacity, StatusBar, Image, B
 
 // IMportar material para  iconos
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// IMportar Componentes
 import Style_Btn from "../../Componentes/Style_Btn";
 import Style_link from "../../Componentes/Style_link";
 
@@ -19,9 +20,6 @@ const Login = ({navigation})=>{
     //   name:"user",
     //   password:"123qwerty"
     // }
-    
-//body: JSON.stringify(Data)
-//Alert.alert('Usuario Invalido');
 
   const acceso = () => {
 
@@ -35,20 +33,31 @@ const Login = ({navigation})=>{
         headers:{
           'Accept':'application/json',
           'Content-Type': 'application/json'
-        },ñ
+        },
       })
       .then((respuesta) => respuesta.json()) //Crear objecto "respuesta " y especificar que es de tipo json, O mejor dicho se obtiene la respuesta y se parsea a JSON.
       .then((respuestaJSON) => {
 
         //Alert.alert(JSON.stringify(respuestaJSON));
 
-        if(respuestaJSON == "p"){
-          Alert.alert('Usuario Invalido');
-        }else if(respuestaJSON == "N"){
+        if(respuestaJSON == "User_N"){
+
+          Alert.alert('El usuario NO existe!');
+
+        }else if(respuestaJSON == "Pass_Inc"){
+
           Alert.alert('Password Invalido'); 
-        }else{
+
+        }else if (respuestaJSON == "cliente"){
+
           navigation.navigate('Navigation')
-        }        
+
+        }else if(respuestaJSON == "administrador"){
+
+          navigation.navigate('Home_Admin')
+        }else{
+          navigation.navigate('Home_Editor')
+        }
       })
       .catch((error)=>{
         console.log(error);
@@ -62,7 +71,9 @@ const Login = ({navigation})=>{
           <ImageBackground source={require('../../Recursos/Img/ceramics.jpg')} resizeMode='cover' style={styles.img}>
           <View style={styles.Overshadow} >
             <Text style={styles.tittle}>Hola!</Text>
+
               <Image style={{width: 150, height:150, margin: 30, }} source={require('../../Recursos/Icon/user.png')}/>
+
               <TextInput style={styles.textInput} 
                 placeholderTextColor='#fff'
                 placeholder='Usuario'
@@ -149,13 +160,3 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
-
-
-
-/* <Button 
-              title="Vista previa admin"
-              color='#F39C12'
-              onPress={()=>{
-                navigation.navigate('Home_Admin')
-              }}
-              /> */
