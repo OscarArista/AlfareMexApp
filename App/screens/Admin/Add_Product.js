@@ -20,25 +20,15 @@ const Add_Product = ({navigation})=>{
             (async () =>{
                 if(Platform.OS !== 'android'){
                     const {stutus} = await ImagePicker.requestCameraPermissionsAsync();
-                    if (stutus !== 'granted'){
-                        alert('Lo sentimos, se require permisos de la galeria ');
-                    }
+                   
                 }
             })();
         },[])
 
-        //seleccionar una imagen de la galeria
-        var URL = 'https://ahh.proyectostics.com/AppMovil/Registrar.php'
+        
 
         fetch(URL,{
-            method:'POST',
-            body: JSON.stringify({
-                
-            }),
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'aplication/json'
-            },
+          
         })
         .then((respuesta) => respuesta.JSON())
         .then((respuestaJSON) => {
@@ -49,12 +39,6 @@ const Add_Product = ({navigation})=>{
         })
 
         const pickImage = async()=>{
-            let result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.All,
-                allowsEditing: false,
-                aspect:[4,3],
-                quality:1,
-            });
             if(!result.cancelled){
                 setImage(result,uri);
                 setphotoStatus('Listo!, Imagen cargada correctamente')
