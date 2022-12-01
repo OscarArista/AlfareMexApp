@@ -70,7 +70,7 @@ const Login = ({navigation})=>{
         <View style={styles.Container}>
           <ImageBackground source={require('../../Recursos/Img/ceramics.jpg')} resizeMode='cover' style={styles.img}>
           <View style={styles.Overshadow} >
-            <Text style={styles.tittle}>Hola!</Text>
+            <Text style={styles.tittle}>¡Hola!</Text>
 
               <Image style={{width: 150, height:150, margin: 30, }} source={require('../../Recursos/Icon/user.png')}/>
 
